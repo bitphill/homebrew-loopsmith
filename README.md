@@ -5,25 +5,30 @@ agent loops behind a deterministic verification gate.
 
 ```bash
 brew tap bitphill/loopsmith
-brew trust bitphill/loopsmith
 brew install loopsmith
 ```
 
-`brew trust` is not optional on Homebrew 6 and later: it refuses to load a formula
-from an untrusted third-party tap, and without it you get
+Or in one line, without tapping:
+
+```bash
+brew install bitphill/loopsmith/loopsmith
+```
+
+Those are the only two forms Homebrew accepts. A two-component
+`brew install bitphill/loopsmith` is not a formula reference — Homebrew reads it as
+a core formula named `loopsmith` and answers `No available formula with the name
+"loopsmith"`.
+
+On Homebrew 6 and later both forms need `brew trust bitphill/loopsmith` once
+first. Without it you get
 
 ```
 Error: Refusing to load formula bitphill/loopsmith/loopsmith from untrusted tap bitphill/loopsmith.
 ```
 
 It is a one-time acknowledgement per tap that you have decided to run someone
-else's build instructions. After it, the bare name resolves, so `brew install
-loopsmith` and `brew upgrade loopsmith` are enough. The fully qualified name works
-too, and does not need the tap step:
-
-```bash
-brew install bitphill/loopsmith/loopsmith
-```
+else's build instructions, and it is per tap rather than per formula. Older
+Homebrew does not need it.
 
 The formula builds from source and needs Rust only at build time
 (`depends_on "rust" => :build`), so no Rust toolchain is left behind afterwards.
