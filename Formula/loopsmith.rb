@@ -20,11 +20,15 @@
 #
 # `gh api repos/.../tarball/<ref>` is not a substitute: it mangles binary output
 # and returns a 199-byte fragment for every ref.
+# This copy is the template. The release workflow renders the `url` and
+# `sha256` below for the tag being released and pushes the result to
+# github.com/bitphill/homebrew-loopsmith, which is what `brew install` actually
+# reads. Edit the body here; the two rendered lines will be overwritten.
 class Loopsmith < Formula
   desc "Self-evolving agent loops behind a deterministic verification gate"
   homepage "https://github.com/bitphill/loopsmith"
-  url "https://github.com/bitphill/loopsmith/archive/refs/tags/v0.2.2.tar.gz"
-  sha256 "960ad906d5f0794d98f7321cb77189833b3ef1b64a6f5f1c7bb96a0567abb00c"
+  url "https://github.com/bitphill/loopsmith/archive/refs/tags/v0.3.0.tar.gz"
+  sha256 "71a744be3d1f54ceb8ef2d98cbc9079e598443ff2495d41fa644a0f5773c2ec1"
   license "MIT"
   head "https://github.com/bitphill/loopsmith.git", branch: "main"
 
