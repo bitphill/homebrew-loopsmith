@@ -33,6 +33,31 @@ Homebrew does not need it.
 The formula builds from source and needs Rust only at build time
 (`depends_on "rust" => :build`), so no Rust toolchain is left behind afterwards.
 
+## Once it is installed
+
+You do not have to learn the config format first. Two guided front ends build one
+*for* you, asking one question at a time and explaining every field as they go:
+
+```bash
+loopsmith --web        # in your browser; offers a walk-through if you are new
+loopsmith --guided     # the same questions in the terminal, no browser needed
+```
+
+`--web` opens on `127.0.0.1` only and asks whether you have done this before. Say
+no and it explains what a loop is, offers a ready-made one to start from, and
+walks you through the rest a card at a time. `--guided` asks the same questions in
+a bare terminal, which is the one to reach for over SSH.
+
+Neither runs anything or spends anything while you answer — you are writing a
+description, and nothing happens until you press a button.
+
+**Not a developer?** Start with the plain-English guide:
+[README-FOR-DUMMIES.md](https://github.com/bitphill/loopsmith/blob/main/README-FOR-DUMMIES.md).
+
+**Reading the code?** There is a generated code wiki, the same pages on two
+surfaces: a [browsable viewer](https://bitphill.github.io/loopsmith/wiki/#overview)
+and the [GitHub Wiki](https://github.com/bitphill/loopsmith/wiki).
+
 ## Why a tap rather than homebrew-core
 
 A formula in `homebrew-core` would make the tap step unnecessary. That route needs
