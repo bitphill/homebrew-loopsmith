@@ -27,8 +27,8 @@
 class Loopsmith < Formula
   desc "Self-evolving agent loops behind a deterministic verification gate"
   homepage "https://github.com/bitphill/loopsmith"
-  url "https://github.com/bitphill/loopsmith/archive/refs/tags/v0.3.0.tar.gz"
-  sha256 "71a744be3d1f54ceb8ef2d98cbc9079e598443ff2495d41fa644a0f5773c2ec1"
+  url "https://github.com/bitphill/loopsmith/archive/refs/tags/v0.3.1.tar.gz"
+  sha256 "4d17ff4a8a812f41f239269e476df01200363ae35ce382ee5bdd60cb3125b229"
   license "MIT"
   head "https://github.com/bitphill/loopsmith.git", branch: "main"
 
@@ -40,6 +40,29 @@ class Loopsmith < Formula
     cd "runtime" do
       system "cargo", "install", *std_cargo_args(path: "crates/loopsmith-cli")
     end
+  end
+
+  # Homebrew prints this once, straight after the install. It is the only place a
+  # tap can say anything to someone who has just arrived, so it spends that space
+  # on the two commands that ask you what you want rather than expecting you to
+  # already know the config format.
+  def caveats
+    <<~EOS
+      Two guided ways to build your first loop, both of which ask one question at
+      a time and explain every field as they go:
+
+        loopsmith --web        in your browser; offers a walk-through if you are new
+        loopsmith --guided     the same questions in this terminal, no browser needed
+
+      Neither runs anything or spends anything while you answer.
+
+      Plain-English guide:
+        https://github.com/bitphill/loopsmith/blob/main/README-FOR-DUMMIES.md
+
+      Code wiki, the same pages on two surfaces:
+        https://bitphill.github.io/loopsmith/wiki/#overview
+        https://github.com/bitphill/loopsmith/wiki
+    EOS
   end
 
   test do
