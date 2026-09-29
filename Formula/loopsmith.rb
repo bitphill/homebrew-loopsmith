@@ -27,8 +27,8 @@
 class Loopsmith < Formula
   desc "Self-evolving agent loops behind a deterministic verification gate"
   homepage "https://github.com/bitphill/loopsmith"
-  url "https://github.com/bitphill/loopsmith/archive/refs/tags/v0.3.1.tar.gz"
-  sha256 "4d17ff4a8a812f41f239269e476df01200363ae35ce382ee5bdd60cb3125b229"
+  url "https://github.com/bitphill/loopsmith/archive/refs/tags/v1.0.0.tar.gz"
+  sha256 "b9a5b54087b539c7d243ad97d3b9f8938f491428257375c1ff7788793683738f"
   license "MIT"
   head "https://github.com/bitphill/loopsmith.git", branch: "main"
 
@@ -74,15 +74,15 @@ class Loopsmith < Formula
     assert_match "platform", doctor
     assert_match "userland", doctor
 
-    # A scaffolded loop must refuse to validate until its `pre_execution` steps
-    # are marked done. That refusal is the product, so a build where it stops
-    # happening is a broken build.
-    system bin/"loopsmith", "new", "--path", testpath/"demo", "--purpose", "brew test"
+    # A scaffolded loop must refuse to validate until its
+    # `intent.prerequisites` steps are marked done. That refusal is the
+    # product, so a build where it stops happening is a broken build.
+    system bin/"loopsmith", "loop", "new", "--path", testpath/"demo", "--purpose", "brew test"
     assert_path_exists testpath/"demo/loop.yaml"
     assert_path_exists testpath/"demo/run.sh"
     assert_path_exists testpath/"demo/run.cmd"
 
-    output = shell_output("#{bin}/loopsmith validate #{testpath}/demo/loop.yaml 2>&1", 1)
-    assert_match "pre_execution", output
+    output = shell_output("#{bin}/loopsmith loop validate #{testpath}/demo/loop.yaml 2>&1", 1)
+    assert_match "intent.prerequisites", output
   end
 end
